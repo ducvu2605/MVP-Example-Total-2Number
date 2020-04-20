@@ -14,7 +14,7 @@ import com.example.mvpexample2.Presenter.PresenterImpl;
 import com.example.mvpexample2.R;
 
 public class MainActivity extends AppCompatActivity implements Contract.View, View.OnClickListener {
-    EditText edNum1,edNum2;
+    EditText edNumberOne,edNumberTwo;
     TextView tvShowTotal;
     Button btnClick;
 
@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity implements Contract.View, Vi
         eventClick();
     }
     public void setUpFindViewById(){
-        edNum1 = findViewById(R.id.ed_name);
-        edNum2 = findViewById(R.id.ed_id);
+        edNumberOne = findViewById(R.id.ed_name);
+        edNumberTwo = findViewById(R.id.ed_id);
         tvShowTotal = findViewById(R.id.tv_show);
         btnClick = findViewById(R.id.btn_click);
     }
@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity implements Contract.View, Vi
     }
     @Override
     public void onClick(View view) {
-        numberOne = Integer.parseInt(edNum1.getText().toString());
-        numberTwo = Integer.parseInt(edNum2.getText().toString());
-        mPresenter.getTotalNum1AndNum2(numberOne,numberTwo);
+        numberOne = Integer.parseInt(edNumberOne.getText().toString());
+        numberTwo = Integer.parseInt(edNumberTwo.getText().toString());
+        mPresenter.calculatorSumTwoNumber(numberOne,numberTwo);
     }
     @Override
     protected void onStart() {
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements Contract.View, Vi
         mPresenter.dropView();
     }
     @Override
-    public void showTotalNum1AndNum2(int total) {
+    public void showTotalTwoNumber(int total) {
         tvShowTotal.setText(total+"");
         Toast.makeText(this,"Đã truyền được dữ liệu tổng 2 số là "+total,Toast.LENGTH_SHORT).show();
     }

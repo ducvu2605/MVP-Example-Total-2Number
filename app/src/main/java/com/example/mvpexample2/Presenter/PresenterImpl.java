@@ -15,10 +15,10 @@ public class PresenterImpl implements Contract.Presenter {
     }
 
     @Override
-    public void getTotalNum1AndNum2(int numberOne, int numberTwo) {
+    public void calculatorSumTwoNumber(int numberOne, int numberTwo) {
         int total = numberOne+numberTwo;
         Log.d("KiemTra",total+"");
-        mView.showTotalNum1AndNum2(total);
+        mView.showTotalTwoNumber(total);
     }
 
 
