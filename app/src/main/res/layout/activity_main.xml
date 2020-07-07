@@ -9,25 +9,26 @@
     android:gravity="center"
     >
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MVP EXAMPLE"
+        android:text="MVP - LOGIN"
         android:textSize="30sp"
         android:layout_marginLeft="60dp"
         android:textColor="#000"
         android:textStyle="bold"/>
     <EditText
-        android:id="@+id/ed_name"
+        android:id="@+id/ed_id_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Số A"
+        android:hint="ID name"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Số B"
-        android:id="@+id/ed_id"/>
+        android:hint="password"
+        android:id="@+id/ed_password"/>
 
 <View
     android:layout_marginTop="10dp"
@@ -41,6 +42,8 @@
     android:layout_weight="1"
     android:hint="show info"
     />
+
+
     <Button
         android:id="@+id/btn_click"
         android:layout_width="match_parent"
