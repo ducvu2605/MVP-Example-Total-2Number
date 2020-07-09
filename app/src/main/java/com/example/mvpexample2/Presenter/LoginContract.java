@@ -12,5 +12,10 @@ public interface LoginContract {
         void dropView();
         void loginUser(String idName ,String password);
     }
+    interface IUser{
+        String getIdName();
+        String getPassword();
+        boolean isValidUser();
+    }
 
 }
