@@ -1,30 +1,30 @@
 package com.example.mvpexample2.Model;
 
-public class User {
+import android.text.TextUtils;
+
+import com.example.mvpexample2.Presenter.LoginContract;
+
+public class User implements LoginContract.IUser {
     private String idName;
     private String passWord;
-
-    public User() {
-    }
 
     public User(String idName, String passWord) {
         this.idName = idName;
         this.passWord = passWord;
     }
 
+    @Override
     public String getIdName() {
         return idName;
     }
 
-    public void setIdName(String idName) {
-        this.idName = idName;
-    }
-
-    public String getPassWord() {
+    @Override
+    public String getPassword() {
         return passWord;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    @Override
+    public boolean isValidUser() {
+        return !TextUtils.isEmpty(getIdName()) && getPassword().length() >= 3;
     }
 }
