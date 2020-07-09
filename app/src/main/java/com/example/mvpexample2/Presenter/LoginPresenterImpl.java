@@ -18,7 +18,9 @@ public class LoginPresenterImpl implements LoginContract.Presenter {
 
     @Override
     public void loginUser(String idName, String password) {
-        if (idName.equals("MVP@Vu") && password.equals("123")) {
+        User user = new User(idName , password);
+        boolean isLoginSuccess = user.isValidUser();
+        if (user.getIdName().equals("Vudeptrai") && user.getPassword().equals("123")) {
             // Login success
             mView.onLoginSuccess();
 
