@@ -9,39 +9,47 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mvpexample2.Presenter.Contract;
-import com.example.mvpexample2.Presenter.PresenterImpl;
+import com.example.mvpexample2.Presenter.LoginContract;
+import com.example.mvpexample2.Presenter.LoginPresenterImpl;
 import com.example.mvpexample2.R;
 
-public class MainActivity extends AppCompatActivity implements Contract.View, View.OnClickListener {
-    EditText edNumberOne,edNumberTwo;
-    TextView tvShowTotal;
-    Button btnClick;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    Contract.Presenter mPresenter;
-    int numberOne , numberTwo;
+public class MainActivity extends AppCompatActivity implements LoginContract.View, View.OnClickListener {
+    @BindView(R.id.ed_id_name) EditText edIdName;
+    @BindView(R.id.ed_password) EditText edPassword;
+    @BindView(R.id.tv_show) TextView tvShow;
+    @BindView(R.id.btn_click) Button btnClick;
+    private LoginContract.Presenter mPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mPresenter = new PresenterImpl();
+        mPresenter = new LoginPresenterImpl();
         setUpFindViewById();
+        ButterKnife.bind(this);
         eventClick();
     }
     public void setUpFindViewById(){
-        edNumberOne = findViewById(R.id.ed_name);
-        edNumberTwo = findViewById(R.id.ed_id);
-        tvShowTotal = findViewById(R.id.tv_show);
-        btnClick = findViewById(R.id.btn_click);
+//        edIdName = findViewById(R.id.ed_id_name);
+//        edPassword = findViewById(R.id.ed_password);
+//        tvShowTotal = findViewById(R.id.tv_show);
+//        btnClick = findViewById(R.id.btn_click);
     }
     public void eventClick(){
         btnClick.setOnClickListener(this);
     }
+    public void login(){
+        String idName = edIdName.getText().toString().trim();
+        String password = edPassword.getText().toString().trim();
+        mPresenter.loginUser(idName,password);
+    }
     @Override
     public void onClick(View view) {
-        numberOne = Integer.parseInt(edNumberOne.getText().toString());
-        numberTwo = Integer.parseInt(edNumberTwo.getText().toString());
-        mPresenter.calculatorSumTwoNumber(numberOne,numberTwo);
+        tvShow.setText("");
+        login();
     }
     @Override
     protected void onStart() {
@@ -53,9 +61,16 @@ public class MainActivity extends AppCompatActivity implements Contract.View, Vi
         super.onDestroy();
         mPresenter.dropView();
     }
+
     @Override
-    public void showTotalTwoNumber(int total) {
-        tvShowTotal.setText(total+"");
-        Toast.makeText(this,"Đã truyền được dữ liệu tổng 2 số là "+total,Toast.LENGTH_SHORT).show();
+    public void onLoginSuccess() {
+        Toast.makeText(this, "Login successful !", Toast.LENGTH_SHORT).show();
+        tvShow.setText("Login Successfull !!!");
+    }
+
+    @Override
+    public void onLoginFail(String error) {
+        Toast.makeText(this, "Login failure !" + error, Toast.LENGTH_SHORT).show();
+        tvShow.setText(error);
     }
 }
